@@ -1,1 +1,1 @@
-# AnalysisOfAlgorithm_Sudoku_2019
+# AnalysisOfAlgorithm Sudoku 2019
