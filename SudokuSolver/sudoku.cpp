@@ -1,6 +1,7 @@
 #include "sudoku.h"
 #include "ui_sudoku.h"
-#include "sudoku_solver_v2.cpp"
+#include "sudoku_solver_v3.cpp"
+//#include "sudoku_solver_v2.cpp"
 #include <QString>
 #include <QObject>
 #include <QtCharts>
@@ -151,13 +152,17 @@ void sudoku::on_solveButton_clicked(){
 
     pulldata();
 
-    // CHART
-    QBarSet *set1 = new QBarSet("Math");
-    QBarSet *set2 = new QBarSet("Backtracking");
-    QBarSet *set3 = new QBarSet("Math+Backtrack");
+    if(!math_finish) math_time = -1;
 
-    if(math_finish) *set1 << math_time;
-    else *set1 << -1;
+    // CHART
+    QBarSet *set1;
+    if(math_time==-1) set1 = new QBarSet("Math error");
+    else set1 = new QBarSet("Math: " + QString::number(math_time) + "ms");
+    QBarSet *set2 = new QBarSet("Backtracking: " + QString::number(backtrack_time) + "ms");
+    QBarSet *set3 = new QBarSet("Math+Backtrack: " + QString::number(mbt_time) + "ms");
+
+
+    *set1 << math_time;
     *set2 << backtrack_time;
     *set3 << mbt_time;
 
@@ -168,7 +173,7 @@ void sudoku::on_solveButton_clicked(){
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Time in Computing Sudoku (ns)");
+    chart->setTitle("Time in Computing Sudoku");
     chart->setAnimationOptions(QChart::AllAnimations);
 
     QStringList categories;
