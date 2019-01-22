@@ -1,7 +1,6 @@
 #include "sudoku.h"
 #include "ui_sudoku.h"
 #include "sudoku_solver_v3.cpp"
-//#include "sudoku_solver_v2.cpp"
 #include <QString>
 #include <QObject>
 #include <QtCharts>

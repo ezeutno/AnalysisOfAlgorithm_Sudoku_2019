@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         sudoku.cpp \
-    sudoku_solver_v2.cpp \
     sudoku_solver_v3.cpp
 
 HEADERS += \
